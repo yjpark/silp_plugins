@@ -8,7 +8,7 @@ import sys
 def compile_include(folder):
     lines = []
     root = os.path.abspath(folder)
-    silp.info('Adding files to compile include: %s' % root)
+    silp.term.info('Adding files to compile include: %s' % root)
     files = [os.path.join(dirpath, f)
              for dirpath, dirnames, files in os.walk(root)
              for f in files if f.endswith(".cs")]
