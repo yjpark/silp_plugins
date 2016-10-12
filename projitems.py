@@ -16,7 +16,7 @@ def compile_include(folder):
     for path in files:
         path = path.replace(root, '')
         path = path.replace('/', '\\')
-        line = '<Compile Include="%s%s" />' % (folder, path)
+        line = '<Compile Include="$(MSBuildThisFileDirectory)%s%s" />' % (folder, path)
         lines.append(line)
     return lines
 
