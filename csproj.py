@@ -30,13 +30,13 @@ def compile_include(folder):
     return lines
 
 
-def xaml_include(folder):
+def _embedded_resource_include(folder, ext):
     lines = []
     root = os.path.abspath(folder)
     silp.term.info('Adding files to embedded resource include: %s' % root)
     files = [os.path.join(dirpath, f)
              for dirpath, dirnames, files in os.walk(root)
-             for f in files if f.endswith(".xaml")]
+             for f in files if f.endswith(ext)]
     folder = folder.replace('/', '\\')
     for path in files:
         path = path.replace(root, '')
@@ -44,4 +44,12 @@ def xaml_include(folder):
         line = '<EmbeddedResource Include="$(MSBuildThisFileDirectory)%s%s" />' % (folder, path)
         lines.append(line)
     return lines
+
+
+def xaml_include(folder):
+    return _embedded_resource_include(folder, ".xaml")
+
+
+def html_include(folder):
+    return _embedded_resource_include(folder, ".html")
 
