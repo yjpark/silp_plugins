@@ -18,14 +18,14 @@ def compile_include(folder):
         path = path.replace(root, '')
         path = path.replace('/', '\\')
         if name.endswith('.xaml.cs'):
-            line = '<Compile Include="$(MSBuildThisFileDirectory)%s%s">' % (folder, path)
+            line = '<Compile Include="%s%s">' % (folder, path)
             lines.append(line)
             line = '  <DependentUpon>%s</DependentUpon>' % name.replace('.cs', '')
             lines.append(line)
             line = '</Compile>'
             lines.append(line)
         else:
-            line = '<Compile Include="$(MSBuildThisFileDirectory)%s%s" />' % (folder, path)
+            line = '<Compile Include="%s%s" />' % (folder, path)
             lines.append(line)
     return lines
 
@@ -41,7 +41,7 @@ def _embedded_resource_include(folder, ext):
     for path in files:
         path = path.replace(root, '')
         path = path.replace('/', '\\')
-        line = '<EmbeddedResource Include="$(MSBuildThisFileDirectory)%s%s" />' % (folder, path)
+        line = '<EmbeddedResource Include="%s%s" />' % (folder, path)
         lines.append(line)
     return lines
 
